@@ -164,6 +164,24 @@ func TestGetFailureCanReadErrorBody(t *testing.T) {
 		t.Fatal("Client received error while closing body")
 	}
 }
+func TestGetWithoutCredential(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "groups.json")
+	client, err := NewClient(nil)
+	if err != nil {
+		t.Fatalf("Unexpected error creating client: %s", err)
+	}
+	client.SetEndpointURL(mockAPI.URL)
+	defer mockAPI.Close()
+
+	body, err := client.get(ctx, "/groups.json")
+	if err != nil {
+		t.Fatalf("Failed to send request: %s", err)
+	}
+
+	if len(body) == 0 {
+		t.Fatal("Response body is empty")
+	}
+}
 
 func TestPost(t *testing.T) {
 	mockAPI := newMockAPIWithStatus(http.MethodPost, "groups.json", http.StatusCreated)
