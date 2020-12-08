@@ -1,0 +1,21 @@
+{
+  "job_status": {
+    "id": "e57bc8b851f93833d87748557c9b7e4b",
+    "url": "https://d3v-polytomic.zendesk.com/api/v2/job_statuses/e57bc8b851f93833d87748557c9b7e4b.json",
+    "total": 5,
+    "progress": 5,
+    "status": "completed",
+    "message": "Completed at 2020-12-09 17:17:44 +0000",
+    "results": [
+      { "id": 407695881391, "status": "Created", "email": "vqkyghe@pzpvw.net" },
+      { "id": 407695881411, "status": "Created", "email": "hxaqjyz@wtzoe.org" },
+      { "id": 407695881431, "status": "Created", "email": "uucuscl@npjxs.biz" },
+      {
+        "id": 407695881451,
+        "status": "Created",
+        "email": "zhocowk@nfubc.info"
+      },
+      { "id": 407695881471, "status": "Created", "email": "mxiuqaq@szqnm.org" }
+    ]
+  }
+}
