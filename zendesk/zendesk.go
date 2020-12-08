@@ -112,8 +112,24 @@ func (z *Client) get(ctx context.Context, path string) ([]byte, error) {
 	return body, nil
 }
 
+type requestSettings struct {
+	statusCode int
+}
+
+type requestSetting func(*requestSettings)
+
+func expectStatus(status int) requestSetting {
+	return func(ro *requestSettings) {
+		ro.statusCode = status
+	}
+}
+
 // post send data to API and returns response body as []bytes
-func (z *Client) post(ctx context.Context, path string, data interface{}) ([]byte, error) {
+func (z *Client) post(ctx context.Context, path string, data interface{}, opts ...requestSetting) ([]byte, error) {
+	reqSettings := &requestSettings{statusCode: http.StatusCreated}
+	for _, set := range opts {
+		set(reqSettings)
+	}
 	bytes, err := json.Marshal(data)
 	if err != nil {
 		return nil, err
@@ -137,7 +153,7 @@ func (z *Client) post(ctx context.Context, path string, data interface{}) ([]byt
 		return nil, err
 	}
 
-	if resp.StatusCode != http.StatusCreated {
+	if resp.StatusCode != reqSettings.statusCode {
 		return nil, Error{
 			body: body,
 			resp: resp,

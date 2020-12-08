@@ -83,6 +83,23 @@ func TestGetUsersRolesEncodeCorrectly(t *testing.T) {
 	}
 }
 
+func TestCreateOrUpdateManyUsers(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "createOrUpdateManyUsers.json", http.StatusOK)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	job, err := client.CreateOrUpdateManyUsers(ctx, []User{{
+		Email: "test@example.com",
+		Name:  "testuser",
+	}})
+	if err != nil {
+		t.Fatalf("Failed to get valid response: %s", err)
+	}
+	if job.ID != "8b726e606741012ffc2d782bcb7848fe" {
+		t.Fatal("unexpected job ID returned")
+	}
+}
+
 func TestCreateUser(t *testing.T) {
 	mockAPI := newMockAPIWithStatus(http.MethodPost, "users.json", http.StatusCreated)
 	client := newTestClient(mockAPI)

@@ -139,6 +139,21 @@ func (mr *ClientMockRecorder) CreateGroup(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateGroup", reflect.TypeOf((*Client)(nil).CreateGroup), arg0, arg1)
 }
 
+// CreateOrUpdateManyUsers mocks base method
+func (m *Client) CreateOrUpdateManyUsers(arg0 context.Context, arg1 []zendesk.User) (zendesk.Job, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateOrUpdateManyUsers", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.Job)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateOrUpdateManyUsers indicates an expected call of CreateOrUpdateManyUsers
+func (mr *ClientMockRecorder) CreateOrUpdateManyUsers(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrUpdateManyUsers", reflect.TypeOf((*Client)(nil).CreateOrUpdateManyUsers), arg0, arg1)
+}
+
 // CreateOrganization mocks base method
 func (m *Client) CreateOrganization(arg0 context.Context, arg1 zendesk.Organization) (zendesk.Organization, error) {
 	m.ctrl.T.Helper()

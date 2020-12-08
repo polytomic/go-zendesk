@@ -1,0 +1,9 @@
+{
+    "job_status": {
+      "id":       "8b726e606741012ffc2d782bcb7848fe",
+      "url":      "https://company.zendesk.com/api/v2/job_statuses/8b726e606741012ffc2d782bcb7848fe.json",
+      "total":    2,
+      "progress": 2,
+      "status":   "queued"
+    }
+  }
