@@ -34,7 +34,7 @@ func TestGetUserFields(t *testing.T) {
 }
 
 func TestUserFieldQueryParamsSet(t *testing.T) {
-	opts := UserFieldListOptions{
+	opts := CustomFieldListOptions{
 		PageOptions{
 			Page: 2,
 		},

@@ -895,10 +895,10 @@ func (mr *ClientMockRecorder) GetUser(arg0, arg1 interface{}) *gomock.Call {
 }
 
 // GetUserFields mocks base method
-func (m *Client) GetUserFields(arg0 context.Context, arg1 *zendesk.UserFieldListOptions) ([]zendesk.UserField, zendesk.Page, error) {
+func (m *Client) GetUserFields(arg0 context.Context, arg1 *zendesk.CustomFieldListOptions) ([]zendesk.CustomField, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetUserFields", arg0, arg1)
-	ret0, _ := ret[0].([]zendesk.UserField)
+	ret0, _ := ret[0].([]zendesk.CustomField)
 	ret1, _ := ret[1].(zendesk.Page)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2

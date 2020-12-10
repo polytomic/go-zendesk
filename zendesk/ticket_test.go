@@ -97,7 +97,7 @@ func TestGetTicketCanceledContext(t *testing.T) {
 func TestGetTicketWithInvalidCustomField(t *testing.T) {
 	// Test with a number value.
 	invalidCustomFieldJson := `{ "id": 360005657120, "value": 123.456 }`
-	var customField CustomField
+	var customField CustomFieldValue
 	err := json.Unmarshal([]byte(invalidCustomFieldJson), &customField)
 	if err == nil {
 		t.Fatalf("Expected an error when parsing a custom field of type number.")

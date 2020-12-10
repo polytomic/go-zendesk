@@ -130,25 +130,7 @@ func (z *Client) post(ctx context.Context, path string, data interface{}, opts .
 	for _, set := range opts {
 		set(reqSettings)
 	}
-	bytes, err := json.Marshal(data)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, z.baseURL.String()+path, strings.NewReader(string(bytes)))
-	if err != nil {
-		return nil, err
-	}
-
-	req = z.prepareRequest(ctx, req)
-
-	resp, err := z.httpClient.Do(req)
-	if err != nil {
-		return nil, err
-	}
-
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	body, resp, err := z.postWithResponse(ctx, path, data)
 	if err != nil {
 		return nil, err
 	}
@@ -161,6 +143,33 @@ func (z *Client) post(ctx context.Context, path string, data interface{}, opts .
 	}
 
 	return body, nil
+}
+
+func (z *Client) postWithResponse(ctx context.Context, path string, data interface{}) ([]byte, *http.Response, error) {
+	bytes, err := json.Marshal(data)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, z.baseURL.String()+path, strings.NewReader(string(bytes)))
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req = z.prepareRequest(ctx, req)
+
+	resp, err := z.httpClient.Do(req)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return body, resp, nil
 }
 
 // put sends data to API and returns response body as []bytes
